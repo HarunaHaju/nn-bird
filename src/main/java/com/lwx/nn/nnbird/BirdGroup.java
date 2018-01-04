@@ -109,10 +109,8 @@ public class BirdGroup {
         }
         else{
             for (int i = 0; i < birdNum; i++) {
-                System.out.println(list.get(i).getKey() + " "+birds.get(list.get(i).getKey()).getMaxDistance());
                 birds.get(list.get(i).getKey()).setLastRank(i);
             }
-            System.out.println("*******");
         }
 
         //最优秀4个直接进入下一代
