@@ -13,7 +13,7 @@ public class Ground {
     private int width = 0;
     public Ground(){
         try {
-            image = ImageIO.read(MainFun.class.getResource("/ground.png"));
+            image = ImageIO.read(MainFun.class.getResource("/Image/ground.png"));
             height = image.getHeight();
             width = image.getWidth();
         } catch (Exception e) {

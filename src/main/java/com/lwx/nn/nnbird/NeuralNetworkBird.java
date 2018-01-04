@@ -48,7 +48,7 @@ public class NeuralNetworkBird {
         speed = v0;
         s = 0;
         try {
-            image = ImageIO.read(GamePad.class.getResource("/0.png"));
+            image = ImageIO.read(GamePad.class.getResource("/Image/0.png"));
             width = image.getWidth();
             height = image.getHeight();
             positionX = 215;
@@ -59,7 +59,7 @@ public class NeuralNetworkBird {
             indexHelp = 0;
             flySpeed = 5;
             for (int i = 0; i < 8; i++) {
-                images[i] = ImageIO.read(GamePad.class.getResource("/" + i + ".png"));
+                images[i] = ImageIO.read(GamePad.class.getResource("/Image/" + i + ".png"));
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -28,7 +28,7 @@ public class Column {
 
     public Column(int id) {
         try {
-            image = ImageIO.read(GamePad.class.getResource("/column3.png"));
+            image = ImageIO.read(GamePad.class.getResource("/Image/column3.png"));
             height = image.getHeight();
             width = image.getWidth();
         } catch (Exception e) {
