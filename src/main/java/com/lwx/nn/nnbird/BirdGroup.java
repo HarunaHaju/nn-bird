@@ -93,9 +93,6 @@ public class BirdGroup {
         }
         list.sort(comparator);
 
-        //↓恶心。
-//        if(gen > 100 && birds.get(list.get(0).getKey()).getMaxDistance()
-//                - birds.get(list.get(4).getKey()).getMaxDistance() <= 100)
         if(gen > 10 &&birds.get(list.get(0).getKey()).getMaxDistance()<=70)
         {
             evolveMap.clear();
