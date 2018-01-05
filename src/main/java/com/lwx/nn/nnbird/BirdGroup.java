@@ -5,22 +5,17 @@ import com.lwx.nn.GameObjects.Column;
 import java.util.*;
 
 public class BirdGroup {
-    Vector<NeuralNetworkBird> birds;
+    private Vector<NeuralNetworkBird> birds;
     private int gen;//代数
     private int birdNum;
 
     private static Comparator<Map.Entry<Integer, Integer>> comparator
-            = new Comparator<Map.Entry<Integer, Integer>>() {
-        @Override
-        public int compare(Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2) {
-            return o2.getValue()-o1.getValue();
-        }
-    };
+            = (Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)->o2.getValue()-o1.getValue();
 
     public BirdGroup(int birdNum){
         this.birdNum = birdNum;
         gen = 1;
-        birds = new Vector<NeuralNetworkBird>();
+        birds = new Vector<>();
 
         for (int i = 0; i < birdNum; i++) {
             NeuralNetworkBird bird = new NeuralNetworkBird(i);
@@ -88,9 +83,7 @@ public class BirdGroup {
             evolveMap.put(i,birds.get(i).getMaxDistance());//index,dis
             birds.get(i).reset();
         }
-        for (Map.Entry<Integer,Integer> entry:evolveMap.entrySet()){
-            list.add(entry);
-        }
+        list.addAll(evolveMap.entrySet());
         list.sort(comparator);
 
         if(gen > 10 &&birds.get(list.get(0).getKey()).getMaxDistance()<=70)
@@ -99,9 +92,7 @@ public class BirdGroup {
             for (int i = 0; i < birdNum; i++) {
                 evolveMap.put(i , 100 - birds.get(i).getLastRank());
             }
-            for (Map.Entry<Integer,Integer> entry : evolveMap.entrySet()){
-                list.add(entry);
-            }
+            list.addAll(evolveMap.entrySet());
             list.sort(comparator);
         }
         else{
