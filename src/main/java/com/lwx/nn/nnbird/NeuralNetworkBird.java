@@ -3,7 +3,6 @@ package com.lwx.nn.nnbird;
 import com.lwx.nn.gameobjects.Column;
 import com.lwx.nn.nnbird.NeuralNetwork.Network;
 import com.lwx.nn.nnbird.NeuralNetwork.Neuron;
-import com.lwx.nn.view.GamePad;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -48,7 +47,7 @@ public class NeuralNetworkBird {
         speed = v0;
         s = 0;
         try {
-            image = ImageIO.read(GamePad.class.getResource("/Image/0.png"));
+            image = ImageIO.read(NeuralNetworkBird.class.getResource("/Image/0.png"));
             width = image.getWidth();
             height = image.getHeight();
             positionX = 215;
@@ -59,7 +58,7 @@ public class NeuralNetworkBird {
             indexHelp = 0;
             flySpeed = 5;
             for (int i = 0; i < 8; i++) {
-                images[i] = ImageIO.read(GamePad.class.getResource("/Image/" + i + ".png"));
+                images[i] = ImageIO.read(NeuralNetworkBird.class.getResource("/Image/" + i + ".png"));
             }
         } catch (Exception e) {
             e.printStackTrace();
