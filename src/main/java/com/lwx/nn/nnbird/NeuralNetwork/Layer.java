@@ -2,16 +2,6 @@ package com.lwx.nn.nnbird.NeuralNetwork;
 
 import java.util.Vector;
 
-/**
- * Package: com.lwx.nn.nnbird.nn
- * Comments:
- * Author: lwx
- * Create Date: 2017/11/28
- * Modified Date: 2017/11/28
- * Why & What is modified:
- * Version: 0.0.1beta
- * It's the only NEET thing to do. – Shionji Yuuko
- */
 public class Layer {
     private Vector<Neuron> neurons;
     private int neuronNum;

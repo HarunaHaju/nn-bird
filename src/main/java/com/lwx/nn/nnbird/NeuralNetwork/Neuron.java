@@ -35,10 +35,7 @@ public class Neuron {
         for (int i = 0;i<inputNum;i++){
             mulResult += inputs.get(i) * w.get(i);
         }
-        double result = Math.tanh(mulResult);//tanh
-        //double result = 1/(1+Math.exp(-mulResult-bias));//sigmoid
-        //double result = max(0,mulResult);//ReLU
-        return result;
+        return tanh(mulResult);
     }
 
     public Vector<Double> getW() {
@@ -65,5 +62,17 @@ public class Neuron {
 
     public void setBias(double bias) {
         this.bias = bias;
+    }
+
+    private double tanh(double input){
+        return Math.tanh(input);
+    }
+
+    private double sigmoid(double input){
+        return 1/(1+Math.exp(-input-bias));
+    }
+
+    private double ReLu(double input){
+        return Math.max(0,input);
     }
 }
