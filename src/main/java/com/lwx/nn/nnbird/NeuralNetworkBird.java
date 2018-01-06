@@ -1,6 +1,6 @@
 package com.lwx.nn.nnbird;
 
-import com.lwx.nn.GameObjects.Column;
+import com.lwx.nn.gameobjects.Column;
 import com.lwx.nn.nnbird.NeuralNetwork.Network;
 import com.lwx.nn.nnbird.NeuralNetwork.Neuron;
 import com.lwx.nn.view.GamePad;

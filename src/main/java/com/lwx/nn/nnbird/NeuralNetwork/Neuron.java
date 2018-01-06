@@ -9,7 +9,7 @@ public class Neuron {
     private int inputNum;
 
     public static double maxW = 1;
-    public static double maxBias = 0.5;
+    public static double maxBias = 0.01;
 
     public Neuron(int inputNum) {
         w = new Vector<>();
