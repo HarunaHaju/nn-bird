@@ -1,6 +1,4 @@
-package com.lwx.nn.GameObjects;
-
-import com.lwx.nn.MainFun;
+package com.lwx.nn.gameobjects;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -13,7 +11,7 @@ public class Ground {
     private int width = 0;
     public Ground(){
         try {
-            image = ImageIO.read(MainFun.class.getResource("/Image/ground.png"));
+            image = ImageIO.read(Ground.class.getResource("/Image/ground.png"));
             height = image.getHeight();
             width = image.getWidth();
         } catch (Exception e) {

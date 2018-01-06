@@ -1,21 +1,8 @@
-package com.lwx.nn.GameObjects;
-
-import com.lwx.nn.view.GamePad;
+package com.lwx.nn.gameobjects;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
-/**
- * Project: com.lwx.nn.view
- * Comments:
- * Author: lwx
- * Create Date: 2017/11/22
- * Modified Date: 2017/11/22
- * Why & What is modified:
- * Version: 0.0.1beta
- *
- * It's the only NEET thing to do. – Shionji Yuuko
- */
 public class Column {
     public BufferedImage image = null;
     private int positionX;
@@ -28,7 +15,7 @@ public class Column {
 
     public Column(int id) {
         try {
-            image = ImageIO.read(GamePad.class.getResource("/Image/column3.png"));
+            image = ImageIO.read(Column.class.getResource("/Image/column3.png"));
             height = image.getHeight();
             width = image.getWidth();
         } catch (Exception e) {
