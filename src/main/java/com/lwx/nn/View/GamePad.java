@@ -1,8 +1,8 @@
 package com.lwx.nn.view;
 
 import com.lwx.nn.nnbird.BirdGroup;
-import com.lwx.nn.GameObjects.Column;
-import com.lwx.nn.GameObjects.Ground;
+import com.lwx.nn.gameobjects.Column;
+import com.lwx.nn.gameobjects.Ground;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -37,7 +37,7 @@ public class GamePad extends JPanel {
         column1 = new Column(1);
         birds = new BirdGroup(birdNum);
         try {
-            imageBackGround = ImageIO.read(GamePad.class.getResource("/bg.png"));
+            imageBackGround = ImageIO.read(GamePad.class.getResource("/Image/bg.png"));
         } catch (Exception e) {
             e.printStackTrace();
         }
