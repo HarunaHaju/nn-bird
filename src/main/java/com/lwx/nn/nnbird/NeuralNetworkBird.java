@@ -1,8 +1,8 @@
 package com.lwx.nn.nnbird;
 
 import com.lwx.nn.gameobjects.Column;
-import com.lwx.nn.nnbird.NeuralNetwork.Network;
-import com.lwx.nn.nnbird.NeuralNetwork.Neuron;
+import com.lwx.nn.nnbird.neuralnetwork.Network;
+import com.lwx.nn.nnbird.neuralnetwork.Neuron;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

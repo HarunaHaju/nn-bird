@@ -1,4 +1,4 @@
-package com.lwx.nn.nnbird.NeuralNetwork;
+package com.lwx.nn.nnbird.neuralnetwork;
 
 import java.util.Vector;
 
