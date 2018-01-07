@@ -9,6 +9,14 @@ public class BirdGroup {
     private int gen;//代数
     private int birdNum;
 
+    public static final double MUTATE_RATE = 0.01;
+    public static final double CROSSOVER_RATE = 0.8;
+    public static final int DNA_SIZE = 32;
+    public static final double minW = -1;
+    public static final double maxW = 1;
+    public static final double minBias = -0.01;
+    public static final double maxBias = 0.01;
+
     private static Comparator<Map.Entry<Integer, Integer>> comparator
             = (Map.Entry<Integer, Integer> o1, Map.Entry<Integer, Integer> o2)->o2.getValue()-o1.getValue();
 

@@ -1,5 +1,8 @@
 package com.lwx.nn.nnbird.neuralnetwork;
 
+import com.lwx.nn.nnbird.BirdGroup;
+
+import java.util.HashMap;
 import java.util.Vector;
 
 public class Neuron {
@@ -7,18 +10,34 @@ public class Neuron {
     private double bias;
 
     private int inputNum;
-
-    public static double maxW = 1;
-    public static double maxBias = 0.01;
+    private HashMap<Integer,Vector<Integer>> DNA;
 
     public Neuron(int inputNum) {
         w = new Vector<>();
         this.inputNum = inputNum;
-        for (int i = 0;i<inputNum;i++){
-            w.add((Math.random()>0.5)?Math.random()*maxW:-Math.random()*1);
+
+        DNA = new HashMap<>();
+        for (int i = 0; i < inputNum+1; i++) {
+            Vector<Integer> dnaChain = new Vector<>();
+            for (int j = 0; j < BirdGroup.DNA_SIZE; j++) {
+                dnaChain.add((Math.random()>0.5)?0:1);
+            }
+            DNA.put(i,dnaChain);
         }
-        bias = (Math.random()>0.5)?Math.random()*maxBias:-Math.random()*0.1;
+
+        for (int i = 0;i<inputNum;i++){
+            w.add((Math.random()>0.5)?Math.random()* BirdGroup.maxW:Math.random()*BirdGroup.minW);
+        }
+        bias = (Math.random()>0.5)?Math.random()*BirdGroup.maxBias:Math.random()*BirdGroup.minBias;
+        
     }
+
+//    public Vector<Vector<Integer>> translateDNA(){
+//        for (int i = 0; i < w.size(); i++) {
+//            Vector<Integer> dnaChain = new Vector<>(BirdGroup.DNA_SIZE);
+//
+//        }
+//    }
 
 //    public double getOutput(double input_1,double input_2){
 //        double mulResult = input_1*w1 + input_2*w2 + bias;

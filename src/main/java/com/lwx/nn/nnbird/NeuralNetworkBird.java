@@ -240,14 +240,15 @@ public class NeuralNetworkBird {
             int index = numberList.get((int) (Math.random() * numberList.size()));
             if(index >= network.getLayer0NeuronNum()){
                 for (int j = 0;j<network.getLayer1().getNeuronNum();j++){
-                    w.add((Math.random()>0.5)?Math.random()* Neuron.maxW:-Math.random()* Neuron.maxW);
+                    w.add((Math.random()>0.5)?Math.random()* BirdGroup.maxW:Math.random()* BirdGroup.minW);
                 }
             }else{
                 for (int j = 0;j<network.getLayer0().getNeuronNum();j++){
-                    w.add((Math.random()>0.5)?Math.random()* Neuron.maxW:-Math.random()* Neuron.maxW);
+                    w.add((Math.random()>0.5)?Math.random()* BirdGroup.maxW:Math.random()* BirdGroup.minW);
                 }
             }
-            double bias = (Math.random()>0.5)?Math.random()* Neuron.maxBias:-Math.random()* Neuron.maxBias;
+            double bias = (Math.random()>0.5)?Math.random()* BirdGroup.maxBias:
+                    Math.random()* BirdGroup.minBias;
             this.network.setNeuron(index,w,bias);
             numberList.remove((Integer)index);
         }
