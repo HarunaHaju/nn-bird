@@ -10,26 +10,27 @@ public class Neuron {
     private double bias;
 
     private int inputNum;
-    private HashMap<Integer,Vector<Integer>> DNA;
+    private HashMap<Integer, Vector<Integer>> DNA;
 
     public Neuron(int inputNum) {
         w = new Vector<>();
         this.inputNum = inputNum;
 
         DNA = new HashMap<>();
-        for (int i = 0; i < inputNum+1; i++) {
+        //inputNum + 1 means bias
+        for (int i = 0; i < inputNum + 1; i++) {
             Vector<Integer> dnaChain = new Vector<>();
             for (int j = 0; j < BirdGroup.DNA_SIZE; j++) {
-                dnaChain.add((Math.random()>0.5)?0:1);
+                dnaChain.add((Math.random() > 0.5) ? 0 : 1);
             }
-            DNA.put(i,dnaChain);
+            DNA.put(i, dnaChain);
         }
 
-        for (int i = 0;i<inputNum;i++){
-            w.add((Math.random()>0.5)?Math.random()* BirdGroup.maxW:Math.random()*BirdGroup.minW);
+        for (int i = 0; i < inputNum; i++) {
+            w.add((Math.random() > 0.5) ? Math.random() * BirdGroup.maxW : Math.random() * BirdGroup.minW);
         }
-        bias = (Math.random()>0.5)?Math.random()*BirdGroup.maxBias:Math.random()*BirdGroup.minBias;
-        
+        bias = (Math.random() > 0.5) ? Math.random() * BirdGroup.maxBias : Math.random() * BirdGroup.minBias;
+
     }
 
 //    public Vector<Vector<Integer>> translateDNA(){
@@ -47,11 +48,11 @@ public class Neuron {
 //        return result;
 //    }
 
-    public double getOutput(Vector<Double> inputs){
+    public double getOutput(Vector<Double> inputs) {
         double mulResult = 0;
-        if(inputs.size() != inputNum)
+        if (inputs.size() != inputNum)
             return 0;
-        for (int i = 0;i<inputNum;i++){
+        for (int i = 0; i < inputNum; i++) {
             mulResult += inputs.get(i) * w.get(i);
         }
         return tanh(mulResult);
@@ -73,9 +74,9 @@ public class Neuron {
         this.w = w;
     }
 
-    public void setW(int index,double w){
-        if(index < this.w.size()){
-            this.w.set(index,w);
+    public void setW(int index, double w) {
+        if (index < this.w.size()) {
+            this.w.set(index, w);
         }
     }
 
@@ -83,15 +84,15 @@ public class Neuron {
         this.bias = bias;
     }
 
-    private double tanh(double input){
+    private double tanh(double input) {
         return Math.tanh(input);
     }
 
-    private double sigmoid(double input){
-        return 1/(1+Math.exp(-input-bias));
+    private double sigmoid(double input) {
+        return 1 / (1 + Math.exp(-input - bias));
     }
 
-    private double ReLu(double input){
-        return Math.max(0,input);
+    private double ReLu(double input) {
+        return Math.max(0, input);
     }
 }
