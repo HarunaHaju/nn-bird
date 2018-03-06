@@ -1,16 +1,34 @@
 package com.lwx.nn.nnbird.neuralnetwork;
 
+import com.lwx.nn.nnbird.BirdGroup;
+
 import java.util.ArrayList;
 
 public class DNA {
-    private static final int DNA_SIZE = 20;
     private ArrayList<Integer> chain;
 
     public DNA(ArrayList<Integer> chain) {
-        if (chain.size() == DNA_SIZE)
+        if (chain.size() == BirdGroup.DNA_SIZE)
             this.chain = chain;
         else
             this.chain = new ArrayList<>();
+    }
+
+    public double translate() {
+        return this.translate(0);
+    }
+
+    public double translate(int type) {
+        double max = type == 0 ? BirdGroup.maxW : BirdGroup.maxBias;
+        double min = type == 0 ? BirdGroup.minW : BirdGroup.minBias;
+
+        return 0;
+    }
+
+    public void mutate() {
+        chain.forEach(gene -> {
+            gene = (Math.random() > BirdGroup.CROSSOVER_RATE) ? gene : 1 - gene;
+        });
     }
 
     public ArrayList<Integer> getChain() {
@@ -18,7 +36,7 @@ public class DNA {
     }
 
     public void setChain(ArrayList<Integer> chain) {
-        if (chain.size() == DNA_SIZE)
+        if (chain.size() == BirdGroup.DNA_SIZE)
             this.chain = chain;
     }
 
@@ -29,7 +47,7 @@ public class DNA {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return chain.hashCode();
     }
 
     @Override
