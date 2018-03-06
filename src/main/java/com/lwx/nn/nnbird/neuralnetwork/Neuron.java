@@ -2,6 +2,7 @@ package com.lwx.nn.nnbird.neuralnetwork;
 
 import com.lwx.nn.nnbird.BirdGroup;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -10,20 +11,20 @@ public class Neuron {
     private double bias;
 
     private int inputNum;
-    private HashMap<Integer, Vector<Integer>> DNA;
+    private HashMap<Integer, DNA> dna;
 
     public Neuron(int inputNum) {
         w = new Vector<>();
         this.inputNum = inputNum;
 
-        DNA = new HashMap<>();
+        dna = new HashMap<>();
         //inputNum + 1 means bias
         for (int i = 0; i < inputNum + 1; i++) {
-            Vector<Integer> dnaChain = new Vector<>();
+            ArrayList<Integer> dnaChain = new ArrayList<>();
             for (int j = 0; j < BirdGroup.DNA_SIZE; j++) {
                 dnaChain.add((Math.random() > 0.5) ? 0 : 1);
             }
-            DNA.put(i, dnaChain);
+            dna.put(i, new DNA(dnaChain));
         }
 
         for (int i = 0; i < inputNum; i++) {
