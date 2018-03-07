@@ -21,8 +21,14 @@ public class DNA {
     public double translate(int type) {
         double max = type == 0 ? BirdGroup.maxW : BirdGroup.maxBias;
         double min = type == 0 ? BirdGroup.minW : BirdGroup.minBias;
+        double result = 0;
 
-        return 0;
+        for (int i = 0; i < BirdGroup.DNA_SIZE; i++){
+            result += chain.get(i) * Math.pow(2, BirdGroup.DNA_SIZE - 1 - i);
+        }
+
+        result /= Math.pow(2, BirdGroup.DNA_SIZE) * (max - min) + min;
+        return result;
     }
 
     public void mutate() {
