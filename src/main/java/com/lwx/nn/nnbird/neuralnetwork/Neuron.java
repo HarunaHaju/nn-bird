@@ -7,18 +7,15 @@ import java.util.HashMap;
 import java.util.Vector;
 
 public class Neuron {
-    private Vector<Double> w;
-    private double bias;
-
     private int inputNum;
     private HashMap<Integer, DNA> dna;
 
     public Neuron(int inputNum) {
-        w = new Vector<>();
         this.inputNum = inputNum;
 
         dna = new HashMap<>();
-        //inputNum + 1 means bias
+
+        //inputNum + 1 means bias, use type to distinction
         for (int i = 0; i < inputNum + 1; i++) {
             ArrayList<Integer> dnaChain = new ArrayList<>();
             for (int j = 0; j < BirdGroup.DNA_SIZE; j++) {
@@ -26,71 +23,24 @@ public class Neuron {
             }
             dna.put(i, new DNA(dnaChain));
         }
-
-        for (int i = 0; i < inputNum; i++) {
-            w.add((Math.random() > 0.5) ? Math.random() * BirdGroup.maxW : Math.random() * BirdGroup.minW);
-        }
-        bias = (Math.random() > 0.5) ? Math.random() * BirdGroup.maxBias : Math.random() * BirdGroup.minBias;
-
     }
-
-//    public Vector<Vector<Integer>> translateDNA(){
-//        for (int i = 0; i < w.size(); i++) {
-//            Vector<Integer> dnaChain = new Vector<>(BirdGroup.DNA_SIZE);
-//
-//        }
-//    }
-
-//    public double getOutput(double input_1,double input_2){
-//        double mulResult = input_1*w1 + input_2*w2 + bias;
-//        //double result = Math.tanh(mulResult);//tanh
-//        double result = 1/(1+Math.exp(-mulResult));//sigmoid
-//        //double result = max(0,mulResult);//ReLU
-//        return result;
-//    }
 
     public double getOutput(Vector<Double> inputs) {
         double mulResult = 0;
         if (inputs.size() != inputNum)
             return 0;
+
+        //mul x and w
         for (int i = 0; i < inputNum; i++) {
-            mulResult += inputs.get(i) * w.get(i);
+            mulResult += inputs.get(i) * dna.get(i).translate();
         }
-        return tanh(mulResult);
-    }
 
-    public Vector<Double> getW() {
-        return w;
-    }
-
-    public int getInputNum() {
-        return inputNum;
-    }
-
-    public double getBias() {
-        return bias;
-    }
-
-    public void setW(Vector<Double> w) {
-        this.w = w;
-    }
-
-    public void setW(int index, double w) {
-        if (index < this.w.size()) {
-            this.w.set(index, w);
-        }
-    }
-
-    public void setBias(double bias) {
-        this.bias = bias;
+        //add bias and use tanh
+        return tanh(mulResult + inputNum * dna.get(inputNum).translate(1));
     }
 
     private double tanh(double input) {
         return Math.tanh(input);
-    }
-
-    private double sigmoid(double input) {
-        return 1 / (1 + Math.exp(-input - bias));
     }
 
     private double ReLu(double input) {
