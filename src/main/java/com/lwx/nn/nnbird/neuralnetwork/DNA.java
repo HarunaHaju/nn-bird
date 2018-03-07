@@ -23,7 +23,7 @@ public class DNA {
         double min = type == 0 ? BirdGroup.minW : BirdGroup.minBias;
         double result = 0;
 
-        for (int i = 0; i < BirdGroup.DNA_SIZE; i++){
+        for (int i = 0; i < BirdGroup.DNA_SIZE; i++) {
             result += chain.get(i) * Math.pow(2, BirdGroup.DNA_SIZE - 1 - i);
         }
 
