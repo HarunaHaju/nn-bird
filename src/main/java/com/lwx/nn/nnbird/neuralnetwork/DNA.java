@@ -60,4 +60,11 @@ public class DNA {
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
+
+    @Override
+    public String toString() {
+        return "DNA{" +
+                "chain=" + chain +
+                '}';
+    }
 }
