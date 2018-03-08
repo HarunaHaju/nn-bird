@@ -15,6 +15,7 @@ public class MainFrame extends JFrame implements Runnable {
     private boolean isRunning;
 
     private Thread thread;
+    private static final int THREAD_TIME = 15;
 
     public MainFrame(){
         thread = new Thread(this);
@@ -76,14 +77,19 @@ public class MainFrame extends JFrame implements Runnable {
 
     @Override
     public void run() {
+        long timer = 0;
         while (isRunning){
+            timer = System.currentTimeMillis();
             this.repaint();
             gamePad.logicStep();
-            try {
-                Thread.sleep(1000/60);
-            } catch (Exception e) {
-                isRunning = false;
-                e.printStackTrace();
+            timer = System.currentTimeMillis() - timer;
+            if (THREAD_TIME - timer > 0L) {
+                try {
+                    Thread.sleep(THREAD_TIME - timer);
+                } catch (Exception e) {
+                    isRunning = false;
+                    e.printStackTrace();
+                }
             }
         }
     }

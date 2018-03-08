@@ -39,6 +39,20 @@ public class Neuron {
         return tanh(mulResult + inputNum * dna.get(inputNum).translate(1));
     }
 
+    public void mutate() {
+        dna.forEach((integer, dna) -> dna.mutate());
+    }
+
+    public void crossover(Neuron neuron) {
+        for (int i = 0; i < dna.size(); i++) {
+            dna.get(i).crossover(neuron.getDna().get(i));
+        }
+    }
+
+    public HashMap<Integer, DNA> getDna() {
+        return dna;
+    }
+
     private double tanh(double input) {
         return Math.tanh(input);
     }

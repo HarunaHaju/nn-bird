@@ -9,7 +9,7 @@ public class BirdGroup {
     private int gen;//代数
     private int birdNum;
 
-    public static final double MUTATE_RATE = 0.01;
+    public static final double MUTATE_RATE = 0.05;
     public static final double CROSSOVER_RATE = 0.8;
     public static final int DNA_SIZE = 32;
     public static final double minW = -1;
@@ -116,5 +116,4 @@ public class BirdGroup {
         //mutate
         birds.forEach(NeuralNetworkBird::mutate);
     }
-
 }

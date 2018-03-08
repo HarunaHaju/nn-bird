@@ -27,14 +27,26 @@ public class DNA {
             result += chain.get(i) * Math.pow(2, BirdGroup.DNA_SIZE - 1 - i);
         }
 
-        result /= Math.pow(2, BirdGroup.DNA_SIZE) * (max - min) + min;
+        result = result / Math.pow(2, BirdGroup.DNA_SIZE) * (max - min) + min;
         return result;
     }
 
     public void mutate() {
         chain.forEach(gene -> {
-            gene = (Math.random() > BirdGroup.CROSSOVER_RATE) ? gene : 1 - gene;
+            gene = (Math.random() > BirdGroup.MUTATE_RATE) ? gene : 1 - gene;
         });
+    }
+
+    public void crossover(DNA dna) {
+        ArrayList<Integer> numberList = new ArrayList<>();
+        for (int i = 0; i < BirdGroup.DNA_SIZE; i++) {
+            numberList.add(i);
+        }
+        for (int i = 0; i < BirdGroup.DNA_SIZE / 2; i++) {
+            int index = numberList.get((int) (Math.random() * numberList.size()));
+            this.setChain(index, dna.getChain().get(index));
+            numberList.remove((Integer) index);
+        }
     }
 
     public ArrayList<Integer> getChain() {
@@ -65,6 +77,6 @@ public class DNA {
     public String toString() {
         return "DNA{" +
                 "chain=" + chain +
-                '}';
+                '}' + "w:" + translate(0) +" b:"+translate(1);
     }
 }

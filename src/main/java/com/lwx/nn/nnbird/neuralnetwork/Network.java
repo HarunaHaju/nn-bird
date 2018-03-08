@@ -25,4 +25,19 @@ public class Network {
         inputs.add(input_2);
         return layer1.getOutput(layer0.getOutput(inputs), 0);
     }
+
+    public void crossover(Network network) {
+        for (int i = 0; i < network.layer0.getNeurals().size(); i++) {
+            layer0.getNeurals().get(i).crossover(network.layer0.getNeurals().get(i));
+        }
+
+        for (int i = 0; i < network.layer1.getNeurals().size(); i++) {
+            layer1.getNeurals().get(i).crossover(network.layer1.getNeurals().get(i));
+        }
+    }
+
+    public void mutate() {
+        layer0.getNeurals().forEach(Neuron::mutate);
+        layer1.getNeurals().forEach(Neuron::mutate);
+    }
 }
