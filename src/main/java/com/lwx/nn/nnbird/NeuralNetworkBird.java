@@ -36,7 +36,7 @@ public class NeuralNetworkBird {
     private double speed = 0;
     private double s = 0;
 
-    public NeuralNetworkBird(int index){
+    public NeuralNetworkBird(int index) {
         isAlive = true;
         network = new Network();
         this.index = index;
@@ -160,7 +160,8 @@ public class NeuralNetworkBird {
         t = 0.25;
         isAlive = true;
     }
-    public void resetAll(){
+
+    public void resetAll() {
         positionX = 215;
         positionY = 240;
         speed = v0;
@@ -176,9 +177,9 @@ public class NeuralNetworkBird {
         speed = v0 - g * t;//移动后的速度
     }
 
-    public boolean canFly(double distance,double height){
+    public boolean canFly(double distance, double height) {
         boolean is = false;
-        if(network.getOutput(distance,positionY - height)<=0) is = true;
+        if (network.getOutput(distance, positionY - height) <= 0) is = true;
         return is;
     }
 
@@ -186,84 +187,30 @@ public class NeuralNetworkBird {
         speed = v0;
     }
 
-    public boolean hit(){
+    public boolean hit() {
         if (positionY <= 15 || positionY >= 478) {
             isAlive = false;
         }//判断是否撞到上面和下面
         return isAlive;
     }
-    public boolean hit(Column column){
-        if(positionX+width/2 >column.getPositionX() - column.getWidth()/2
-                && positionX-width/2 <column.getPositionX() + column.getWidth()/2){
-            if(positionY - height/2 < column.getPositionY() - column.getGap()/2||
-                    positionY + height/2 > column.getPositionY() + column.getGap()/2){
+
+    public boolean hit(Column column) {
+        if (positionX + width / 2 > column.getPositionX() - column.getWidth() / 2
+                && positionX - width / 2 < column.getPositionX() + column.getWidth() / 2) {
+            if (positionY - height / 2 < column.getPositionY() - column.getGap() / 2 ||
+                    positionY + height / 2 > column.getPositionY() + column.getGap() / 2) {
                 isAlive = false;
             }
         }
         return isAlive;
     }
 
-    //遗传交叉，随机选择目标的三个染色体进行更新
-    public void crossover(NeuralNetworkBird bird0,NeuralNetworkBird bird1) {
-//        double distanceCount = bird0.getMaxDistance()+bird1.getMaxDistance();
-//        double rate = bird0.getMaxDistance() / distanceCount;
-//        for (int i = 0; i < 10; i++) {
-//            this.network.setNeural(i,
-//                    bird0.getNetwork().getNeural(i).getW() * rate + bird1.getNetwork().getNeural(i).getW() * (1 - rate)
-//                    , bird0.getNetwork().getNeural(i).getBias() * rate + bird1.getNetwork().getNeural(i).getBias() * (1 - rate));
-//        }
-        ArrayList<Integer> numberList = new ArrayList<>();
-        for (int i = 0; i < this.network.getNeuronNum(); i++) {
-            numberList.add(i);
-        }
-        for (int i = 0; i < 5; i++) {
-            int index = numberList.get((int) (Math.random() * numberList.size()));
-            this.network.setNeuron(index,bird0.getNetwork().getNeuron(index).getW()
-                    ,bird0.getNetwork().getNeuron(index).getBias());
-            numberList.remove((Integer) index);
-        }
-        for (Integer i:numberList){
-            this.network.setNeuron(i,bird1.getNetwork().getNeuron(i).getW()
-                    ,bird1.getNetwork().getNeuron(i).getBias());
-        }
+    //遗传交叉，随机选择目标的n个染色体进行更新
+    public void crossover(NeuralNetworkBird bird) {
+        bird.network.crossover(bird.getNetwork());
     }
 
-    //部分变异
-    public void variate(int n){
-        ArrayList<Integer> numberList = new ArrayList<>();
-        Vector<Double> w = new Vector<>();
-        for (int i = 0; i < this.network.getNeuronNum(); i++) {
-            numberList.add(i);
-        }
-        for (int i = 0; i < n; i++) {
-            w.clear();
-            int index = numberList.get((int) (Math.random() * numberList.size()));
-            if(index >= network.getLayer0NeuronNum()){
-                for (int j = 0;j<network.getLayer1().getNeuronNum();j++){
-                    w.add((Math.random()>0.5)?Math.random()* BirdGroup.maxW:Math.random()* BirdGroup.minW);
-                }
-            }else{
-                for (int j = 0;j<network.getLayer0().getNeuronNum();j++){
-                    w.add((Math.random()>0.5)?Math.random()* BirdGroup.maxW:Math.random()* BirdGroup.minW);
-                }
-            }
-            double bias = (Math.random()>0.5)?Math.random()* BirdGroup.maxBias:
-                    Math.random()* BirdGroup.minBias;
-            this.network.setNeuron(index,w,bias);
-            numberList.remove((Integer)index);
-        }
-    }
+    public void mutate() {
 
-    //带变异最优遗传
-    public void variate(Network network){
-        ArrayList<Integer> numberList = new ArrayList<>();
-        for (int i = 0; i < this.network.getNeuronNum(); i++) {
-            numberList.add(i);
-        }
-        for (int i = 0; i < 8; i++) {
-            int index = numberList.get((int) (Math.random() * numberList.size()));
-            this.network.setNeuron(index, network.getNeuron(index).getW(),network.getNeuron(index).getBias());
-            numberList.remove((Integer)index);
-        }
     }
 }
