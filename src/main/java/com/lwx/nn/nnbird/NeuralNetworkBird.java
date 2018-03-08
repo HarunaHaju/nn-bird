@@ -211,6 +211,6 @@ public class NeuralNetworkBird {
     }
 
     public void mutate() {
-
+        network.mutate();
     }
 }
